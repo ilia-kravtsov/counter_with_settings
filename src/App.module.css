@@ -1,0 +1,90 @@
+.App {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #272c33;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border: 3px solid #6ce4f9;
+    background-color: #272c33;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.counterShower {
+    background-color: #6ce4f9;
+    width: 180px;
+    height: 100px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parentIncRes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #6ce4f9;
+    width: 175px;
+    height: 80px;
+    margin: 0px 10px 10px 10px;
+}
+
+.increaseButtonBlock {
+    background-color: #6ce4f9;
+    width: 50px;
+    height: 40px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resetButtonBlock {
+    background-color: #6ce4f9;
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.increaseButtonBlock:active {
+    background-color: #447882;
+}
+
+.resetButtonBlock:active {
+    background-color: #447882;
+}
+
+.disabled {
+    background-color: #447882;
+}
+
+.red {
+    color: red;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+div {
+    border-radius: 5px;
+}
+
+
+
