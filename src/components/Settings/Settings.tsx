@@ -8,6 +8,9 @@ type SettingsType = {
     dataStorage: dataStorageType
     onCLickIncHanlder: () => void
     onCLickResHanlder: () => void
+    onCLickSetHandler: () => void
+    onChangeMaxHandlerCallback: (e: number) => void
+    onChangeStartHandlerCallback: (e: number) => void
     incBtnStyle: string
     resetBtnStyle: string
     btnInc: string
@@ -19,11 +22,11 @@ type SettingsType = {
 const Settings = (props: SettingsType) => {
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-
+        props.onChangeMaxHandlerCallback(+e.currentTarget.value)
     }
 
     const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement>) => {
-
+        props.onChangeStartHandlerCallback(+e.currentTarget.value)
     }
 
     return (
@@ -42,11 +45,13 @@ const Settings = (props: SettingsType) => {
                                                                   onCLickIncHanlder={props.onCLickIncHanlder}
                                                                   incBtnStyle={props.incBtnStyle}
                                                                   onCLickResHanlder={props.onCLickResHanlder}
+                                                                  onCLickSetHandler={props.onCLickSetHandler}
                                                                   resetBtnStyle={props.resetBtnStyle}
                                                                   btnInc={props.btnInc}
                                                                   btnReset={props.btnReset}
                                                                   btnSet={props.btnSet}
-                                                                  setBtnStyle={props.setBtnStyle}/>)}
+                                                                  setBtnStyle={props.setBtnStyle}
+                />)}
             </div>
         </div>
     );

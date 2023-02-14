@@ -1,11 +1,12 @@
 import React from 'react';
 import s from "../../App.module.css";
 import Button from "../Button";
-import {CounterDataType, dataStorageType} from "../../App";
+import {dataStorageType} from "../../App";
 
 type CounterActionsStoreType = {
     onCLickIncHanlder: () => void
     onCLickResHanlder: () => void
+    onCLickSetHandler: () => void
     incBtnStyle: string
     resetBtnStyle: string
     dataStorage: dataStorageType
@@ -28,7 +29,9 @@ const CounterActionsStore = (props: CounterActionsStoreType) => {
                                                                        btnInc={props.btnInc}
                                                                        btnReset={props.btnReset}
                                                                        btnSet={props.btnSet}
-                                                                       setBtnStyle={props.setBtnStyle}/>)
+                                                                       setBtnStyle={props.setBtnStyle}
+                                                                       onCLickSetHandler={props.onCLickSetHandler}
+    />)
     return (
         <div className={s.parentIncRes}>
             {buttonGenerator}

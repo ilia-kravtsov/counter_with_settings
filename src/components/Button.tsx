@@ -3,6 +3,7 @@ import React from 'react';
 type ButtonType = {
     onCLickIncHanlder: () => void
     onCLickResHanlder: () => void
+    onCLickSetHandler: () => void
     incBtnStyle: string
     resetBtnStyle: string
     buttonNameMap: string
@@ -28,7 +29,7 @@ const Button = (props: ButtonType) => {
         )
     } else if (props.buttonNameMap === props.btnSet) {
         return (
-            <div onClick={props.onCLickResHanlder} className={props.setBtnStyle}>
+            <div onClick={props.onCLickSetHandler} className={props.setBtnStyle}>
                 <div>{props.buttonNameMap}</div>
              </div>
         )

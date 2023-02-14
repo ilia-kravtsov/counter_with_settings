@@ -2,13 +2,14 @@ import React from 'react';
 import s from "../../App.module.css";
 import CounterDisplay from "./CounterDisplay";
 import CounterActionsStore from "./CounterActionsStore";
-import {CounterDataType, dataStorageType} from "../../App";
+import {dataStorageType} from "../../App";
 
 export type CounterCountainerType = {
     countStyle: string
     stateCounter: number
     onCLickIncHanlder: () => void
     onCLickResHanlder: () => void
+    onCLickSetHandler: () => void
     incBtnStyle: string
     resetBtnStyle: string
     dataStorage: dataStorageType
@@ -31,6 +32,7 @@ const Counter = (props: CounterCountainerType) => {
                                  btnReset={props.btnReset}
                                  btnSet={props.btnSet}
                                  setBtnStyle={props.setBtnStyle}
+                                 onCLickSetHandler={props.onCLickSetHandler}
             />
         </div>
     );

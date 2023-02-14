@@ -1,9 +1,8 @@
-import React, {useState, MouseEvent} from 'react';
+import React, {useState, MouseEvent, useEffect, ChangeEvent} from 'react';
 import s from './App.module.css';
 import {v1} from "uuid";
 import Counter from "./components/Counter/Counter";
 import Settings from "./components/Settings/Settings";
-
 
 export type CounterDataType = {
     id: string
@@ -27,9 +26,26 @@ function App() {
         ]
     }
 
-    let [stateCounter, setStateCounter] = useState<number>(0)
+    let [startValue, setStartValue] = useState<number>(0)
 
-    const MAX_VALUE = 5
+    useEffect(() => {
+        setStateCounter(startValue)
+    }, [startValue])
+
+    let [maxValue, setMaxValue] = useState<number>(startValue)
+    let [stateCounter, setStateCounter] = useState<number>(startValue)
+
+    useEffect(() => {
+        let valueAsString = localStorage.getItem('counterValue')
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            setStateCounter(newValue)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('counterValue', JSON.stringify(stateCounter))
+    }, [stateCounter])
 
     let countStyle = s.counterShower
     let incBtnStyle = `${s.increaseButtonBlock} ${s.pointer}`
@@ -41,14 +57,37 @@ function App() {
     let btnSet = dataStorage.settings[0].buttonName
 
     const onCLickIncHanlder = () => {
-        if (stateCounter === MAX_VALUE) {return}
+        if (stateCounter === maxValue) {return}
         setStateCounter( stateCounter + 1 )
     }
-    const onCLickResHanlder = () => setStateCounter(0)
+    const onCLickResHanlder = () => setStateCounter(startValue)
+
+    const onCLickSetHandler = () => {
+        let newMaxValue = localStorage.getItem('maxValue')
+        if (newMaxValue) {
+            let newValue = JSON.parse(newMaxValue)
+            setMaxValue(newValue)
+        }
+        let newStartValue = localStorage.getItem('startValue')
+        if (newStartValue) {
+            let newValue = JSON.parse(newStartValue)
+            setStartValue(newValue)
+        }
+    }
+
+    const onChangeMaxHandlerCallback = (e: number) => {
+        // setMaxValue(e)
+        localStorage.setItem('maxValue', JSON.stringify(e))
+    }
+
+    const onChangeStartHandlerCallback = (e: number) => {
+        // setMinValue(e)
+        localStorage.setItem('startValue', JSON.stringify(e))
+    }
 
     if (stateCounter === 0) resetBtnStyle = `${s.resetButtonBlock} ${s.disabled}`
 
-    if (stateCounter === MAX_VALUE) {
+    if (stateCounter === maxValue) {
         incBtnStyle = `${s.increaseButtonBlock} ${s.disabled}`
         countStyle = `${s.counterShower} ${s.red}`
     }
@@ -59,23 +98,29 @@ function App() {
                       countStyle={countStyle}
                       onCLickResHanlder={onCLickResHanlder}
                       onCLickIncHanlder={onCLickIncHanlder}
+                      onCLickSetHandler={onCLickSetHandler}
+                      onChangeMaxHandlerCallback={onChangeMaxHandlerCallback}
+                      onChangeStartHandlerCallback={onChangeStartHandlerCallback}
                       resetBtnStyle={resetBtnStyle}
                       incBtnStyle={incBtnStyle}
                       btnInc={btnInc}
                       btnReset={btnReset}
                       btnSet={btnSet}
-                      setBtnStyle={setBtnStyle}/>
+                      setBtnStyle={setBtnStyle}
+                      />
             <Counter dataStorage={dataStorage}
                      stateCounter={stateCounter}
                      onCLickResHanlder={onCLickResHanlder}
                      onCLickIncHanlder={onCLickIncHanlder}
+                     onCLickSetHandler={onCLickSetHandler}
                      resetBtnStyle={resetBtnStyle}
                      incBtnStyle={incBtnStyle}
                      countStyle={countStyle}
                      btnInc={btnInc}
                      btnReset={btnReset}
                      btnSet={btnSet}
-                     setBtnStyle={setBtnStyle}/>
+                     setBtnStyle={setBtnStyle}
+            />
         </div>
     );
 }
