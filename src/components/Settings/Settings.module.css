@@ -1,0 +1,42 @@
+.settingsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    border: 3px solid #6ce4f9;
+    background-color: #272c33;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.settingsDisplay {
+    background-color: #6ce4f9;
+    width: 180px;
+    height: 100px;
+    margin: 10px;
+    display: flex;
+}
+
+.settingsDisplayElemetns{
+    display: block;
+}
+
+.btnSet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #6ce4f9;
+    width: 175px;
+    height: 80px;
+    margin: 0px 10px 10px 10px;
+}
+
+.values {
+    font-size: 16px;
+}
+
+.inputs {
+    width: 60px;
+    outline: none;
+    border: 1px solid white
+}
