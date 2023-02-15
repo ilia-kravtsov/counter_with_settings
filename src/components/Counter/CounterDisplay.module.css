@@ -1,0 +1,14 @@
+
+.finalImageDefault {
+    font-size: 40px;
+}
+
+.finalImageLessZero {
+    font-size: 20px;
+    color: red;
+}
+
+.finalImageGreaterZero {
+    font-size: 18px;
+    color: #6ce4f9;
+}

@@ -27,13 +27,9 @@ function App() {
     }
 
     let [startValue, setStartValue] = useState<number>(0)
-
-    useEffect(() => {
-        setStateCounter(startValue)
-    }, [startValue])
-
-    let [maxValue, setMaxValue] = useState<number>(startValue)
-    let [stateCounter, setStateCounter] = useState<number>(startValue)
+    let [maxValue, setMaxValue] = useState<number>(0)
+    let [stateCounter, setStateCounter] = useState<number>(0)
+    let [displayTitle, setDisplayTitle] = useState<string | number>('')
 
     useEffect(() => {
         let valueAsString = localStorage.getItem('counterValue')
@@ -44,21 +40,28 @@ function App() {
     }, [])
 
     useEffect(() => {
+
+        let newMaxValue = localStorage.getItem('maxValue')
+        if (newMaxValue) {
+            let newValue = JSON.parse(newMaxValue)
+            setMaxValue(newValue)
+        }
+
+        let newStartValue = localStorage.getItem('startValue')
+        if (newStartValue) {
+            let newValue = JSON.parse(newStartValue)
+            setStartValue(newValue)
+        }
+    }, [])
+
+    useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(stateCounter))
     }, [stateCounter])
-
-    let countStyle = s.counterShower
-    let incBtnStyle = `${s.increaseButtonBlock} ${s.pointer}`
-    let resetBtnStyle = `${s.resetButtonBlock} ${s.pointer}`
-    let setBtnStyle = `${s.setBtn} ${s.pointer}`
-
-    let btnInc = dataStorage.counter[0].buttonName
-    let btnReset = dataStorage.counter[1].buttonName
-    let btnSet = dataStorage.settings[0].buttonName
 
     const onCLickIncHanlder = () => {
         if (stateCounter === maxValue) {return}
         setStateCounter( stateCounter + 1 )
+        setDisplayTitle(stateCounter + 1)
     }
     const onCLickResHanlder = () => setStateCounter(startValue)
 
@@ -72,24 +75,63 @@ function App() {
         if (newStartValue) {
             let newValue = JSON.parse(newStartValue)
             setStartValue(newValue)
+            setStateCounter(newValue)
         }
     }
 
     const onChangeMaxHandlerCallback = (e: number) => {
-        // setMaxValue(e)
+        setMaxValue(e)
+        if (e >= 0) {
+            setDisplayTitle('enter values and press "set"')
+        }
         localStorage.setItem('maxValue', JSON.stringify(e))
     }
 
     const onChangeStartHandlerCallback = (e: number) => {
-        // setMinValue(e)
+        setStartValue(e)
+        if (e >= 0) {
+            setDisplayTitle('enter values and press "set"')
+        }
+        if (e < 0) {
+            setDisplayTitle('Incorrect value!')
+        }
         localStorage.setItem('startValue', JSON.stringify(e))
     }
 
-    if (stateCounter === 0) resetBtnStyle = `${s.resetButtonBlock} ${s.disabled}`
+    let countStyle = s.counterShower
+    let incBtnStyle = `${s.increaseButtonBlock} ${s.pointer}`
+    let resetBtnStyle = `${s.resetButtonBlock} ${s.pointer}`
+    let setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
+    let inputStartStyle = s.inputStart
+    let inputMaxStyle = s.inputMax
+    let btnInc = dataStorage.counter[0].buttonName
+    let btnReset = dataStorage.counter[1].buttonName
+    let btnSet = dataStorage.settings[0].buttonName
+
+    if (displayTitle === 'Incorrect value!') {
+         setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
+         inputStartStyle = `${s.inputStart} ${s.inputStartLessZero}`
+    }
+
+    if (stateCounter === startValue) {
+        resetBtnStyle = `${s.resetButtonBlock} ${s.disabled}`
+        displayTitle = stateCounter
+    }
+
+    if (displayTitle === 'enter values and press "set"') {
+        setBtnStyle = `${s.setBtnDefault} ${s.pointer}`
+    }
 
     if (stateCounter === maxValue) {
         incBtnStyle = `${s.increaseButtonBlock} ${s.disabled}`
         countStyle = `${s.counterShower} ${s.red}`
+    }
+
+    if (startValue >= maxValue) {
+        displayTitle = 'Incorrect value!'
+        setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
+        inputStartStyle = `${s.inputStart} ${s.inputStartLessZero}`
+        inputMaxStyle = `${s.inputMax} ${s.inputStartLessZero}`
     }
 
     return (
@@ -107,6 +149,10 @@ function App() {
                       btnReset={btnReset}
                       btnSet={btnSet}
                       setBtnStyle={setBtnStyle}
+                      inputStartStyle={inputStartStyle}
+                      inputMaxStyle={inputMaxStyle}
+                      maxValue={maxValue}
+                      startValue={startValue}
                       />
             <Counter dataStorage={dataStorage}
                      stateCounter={stateCounter}
@@ -120,6 +166,8 @@ function App() {
                      btnReset={btnReset}
                      btnSet={btnSet}
                      setBtnStyle={setBtnStyle}
+                     displayTitle={displayTitle}
+                     startValue={startValue}
             />
         </div>
     );

@@ -17,12 +17,14 @@ export type CounterCountainerType = {
     btnReset: string
     btnSet: string
     setBtnStyle: string
+    displayTitle: string | number
+    startValue: number
 }
 
 const Counter = (props: CounterCountainerType) => {
     return (
         <div className={s.container}>
-            <CounterDisplay countStyle={props.countStyle} stateCounter={props.stateCounter}/>
+            <CounterDisplay countStyle={props.countStyle} stateCounter={props.stateCounter} displayTitle={props.displayTitle} startValue={props.startValue}/>
             <CounterActionsStore onCLickIncHanlder={props.onCLickIncHanlder}
                                  onCLickResHanlder={props.onCLickResHanlder}
                                  incBtnStyle={props.incBtnStyle}
