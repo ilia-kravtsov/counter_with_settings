@@ -1,5 +1,6 @@
 import React, {useState, MouseEvent, useEffect, ChangeEvent} from 'react';
 import s from './App.module.css';
+import ss from './components/Settings/Settings.module.css'
 import {v1} from "uuid";
 import Counter from "./components/Counter/Counter";
 import Settings from "./components/Settings/Settings";
@@ -32,19 +33,11 @@ function App() {
     let [displayTitle, setDisplayTitle] = useState<string | number>('')
 
     useEffect(() => {
+
         let valueAsString = localStorage.getItem('counterValue')
         if (valueAsString) {
             let newValue = JSON.parse(valueAsString)
             setStateCounter(newValue)
-        }
-    }, [])
-
-    useEffect(() => {
-
-        let newMaxValue = localStorage.getItem('maxValue')
-        if (newMaxValue) {
-            let newValue = JSON.parse(newMaxValue)
-            setMaxValue(newValue)
         }
 
         let newStartValue = localStorage.getItem('startValue')
@@ -52,6 +45,13 @@ function App() {
             let newValue = JSON.parse(newStartValue)
             setStartValue(newValue)
         }
+
+        let newMaxValue = localStorage.getItem('maxValue')
+        if (newMaxValue) {
+            let newValue = JSON.parse(newMaxValue)
+            setMaxValue(newValue)
+        }
+
     }, [])
 
     useEffect(() => {
@@ -76,6 +76,7 @@ function App() {
             let newValue = JSON.parse(newStartValue)
             setStartValue(newValue)
             setStateCounter(newValue)
+            setDisplayTitle(newValue)
         }
     }
 
@@ -83,6 +84,10 @@ function App() {
         setMaxValue(e)
         if (e >= 0) {
             setDisplayTitle('enter values and press "set"')
+            console.log(displayTitle)
+        }
+        if (e < 0) {
+            setDisplayTitle('Incorrect value!')
         }
         localStorage.setItem('maxValue', JSON.stringify(e))
     }
@@ -102,24 +107,19 @@ function App() {
     let incBtnStyle = `${s.increaseButtonBlock} ${s.pointer}`
     let resetBtnStyle = `${s.resetButtonBlock} ${s.pointer}`
     let setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
-    let inputStartStyle = s.inputStart
-    let inputMaxStyle = s.inputMax
+    let inputStartStyle = ss.inputStartSettingsDispay
+    let inputMaxStyle = ss.inputMaxSettingsDispay
     let btnInc = dataStorage.counter[0].buttonName
     let btnReset = dataStorage.counter[1].buttonName
     let btnSet = dataStorage.settings[0].buttonName
 
     if (displayTitle === 'Incorrect value!') {
          setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
-         inputStartStyle = `${s.inputStart} ${s.inputStartLessZero}`
+         inputStartStyle = `${ss.inputStartSettingsDispay} ${ss.inputStartLessZero}`
     }
 
     if (stateCounter === startValue) {
         resetBtnStyle = `${s.resetButtonBlock} ${s.disabled}`
-        displayTitle = stateCounter
-    }
-
-    if (displayTitle === 'enter values and press "set"') {
-        setBtnStyle = `${s.setBtnDefault} ${s.pointer}`
     }
 
     if (stateCounter === maxValue) {
@@ -127,11 +127,27 @@ function App() {
         countStyle = `${s.counterShower} ${s.red}`
     }
 
+    if (startValue < 0) {
+        displayTitle = 'Incorrect value!'
+        setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
+        inputStartStyle = `${ss.inputStartSettingsDispay} ${ss.inputStartLessZero}`
+    }
+
+    if (maxValue < 0) {
+        displayTitle = 'Incorrect value!'
+        setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
+        inputMaxStyle = `${ss.inputMaxSettingsDispay} ${ss.inputStartLessZero}`
+    }
+
     if (startValue >= maxValue) {
         displayTitle = 'Incorrect value!'
         setBtnStyle = `${s.setBtnDefault} ${s.disabled}`
-        inputStartStyle = `${s.inputStart} ${s.inputStartLessZero}`
-        inputMaxStyle = `${s.inputMax} ${s.inputStartLessZero}`
+        inputStartStyle = `${ss.inputStartSettingsDispay} ${ss.inputStartLessZero}`
+        inputMaxStyle = `${ss.inputMaxSettingsDispay} ${ss.inputStartLessZero}`
+    }
+
+    if (displayTitle === 'enter values and press "set"') {
+        setBtnStyle = `${s.setBtnWork} ${s.pointer}`
     }
 
     return (

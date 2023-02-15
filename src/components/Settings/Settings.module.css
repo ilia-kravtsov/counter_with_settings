@@ -9,18 +9,14 @@
     font-weight: bold;
 }
 
-.settingsDisplay {
+.settingsDisplayElements {
     background-color: #272c33;
     border: 3px solid #6ce4f9;
     width: 175px;
     height: 100px;
     margin: 10px;
-    display: flex;
-    color: #6ce4f9;
-}
-
-.settingsDisplayElemetns{
     display: block;
+    color: #6ce4f9;
 }
 
 .btnSet {
@@ -33,8 +29,33 @@
     margin: 0px 10px 10px 10px;
 }
 
-.values {
-    font-size: 16px;
+.inputMaxSettingsDispay {
+    width: 60px;
+    outline: none;
+    border-color: #6ce4f9;
+    border-radius: 3px;
+    height: 15px;
+}
+
+.inputStartSettingsDispay {
+    width: 60px;
+    outline: none;
+    border-color: #6ce4f9;
+    border-radius: 3px;
+    height: 15px;
+}
+
+.inputStartLessZero {
+    background-color: lightcoral;
+    border-color: red;
+}
+
+.MaxElement{
+    margin-top: -7px;
+}
+
+.StartElement{
+
 }
 
 .inputMax {
@@ -43,3 +64,14 @@
     border-color: #6ce4f9;
     border-radius: 3px;
 }
+
+.valuesStart {
+    font-size: 16px;
+    align-self: flex-end;
+}
+
+.valueMax {
+    font-size: 16px;
+    align-self: flex-start;
+}
+

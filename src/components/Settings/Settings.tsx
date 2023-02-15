@@ -1,57 +1,49 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import s from "./Settings.module.css";
-import Button from "../Button";
 import {dataStorageType} from "../../App";
+import SettingsDisplay from "./SettingsDisplay";
+import SettingsButtons from "./SettingsButtons";
 
 type SettingsType = {
-    countStyle: string
-    dataStorage: dataStorageType
+    onChangeMaxHandlerCallback: (e: number) => void
+    onChangeStartHandlerCallback: (e: number) => void
     onCLickIncHanlder: () => void
     onCLickResHanlder: () => void
     onCLickSetHandler: () => void
-    onChangeMaxHandlerCallback: (e: number) => void
-    onChangeStartHandlerCallback: (e: number) => void
-    incBtnStyle: string
-    resetBtnStyle: string
-    btnInc: string
-    btnReset: string
-    btnSet: string
-    setBtnStyle: string
+    dataStorage: dataStorageType
     inputStartStyle: string
+    resetBtnStyle: string
     inputMaxStyle: string
-    maxValue: number
+    incBtnStyle: string
+    setBtnStyle: string
+    countStyle: string
     startValue: number
+    btnReset: string
+    maxValue: number
+    btnInc: string
+    btnSet: string
 }
 
-const Settings = (props: SettingsType) => {
-
-    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => props.onChangeMaxHandlerCallback(+e.currentTarget.value)
-    const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement>) => props.onChangeStartHandlerCallback(+e.currentTarget.value)
+const Settings = (p: SettingsType) => {
 
     return (
         <div className={s.settingsContainer}>
-            <div className={s.settingsDisplay}>
-                <div className={s.settingsDisplayElemetns}>
-                    <span className={s.values}>max value:  </span>
-                    <input value={props.maxValue} onChange={onChangeMaxHandler} type="number" className={props.inputMaxStyle}/>
-                    <span className={s.values}>start value: </span>
-                    <input value={props.startValue} onChange={onChangeStartHandler} type="number" className={props.inputStartStyle}/>
-                </div>
-            </div>
-            <div className={s.btnSet}>
-                {props.dataStorage.settings.map(button => <Button key={button.id}
-                                                                  buttonNameMap={button.buttonName}
-                                                                  onCLickIncHanlder={props.onCLickIncHanlder}
-                                                                  incBtnStyle={props.incBtnStyle}
-                                                                  onCLickResHanlder={props.onCLickResHanlder}
-                                                                  onCLickSetHandler={props.onCLickSetHandler}
-                                                                  resetBtnStyle={props.resetBtnStyle}
-                                                                  btnInc={props.btnInc}
-                                                                  btnReset={props.btnReset}
-                                                                  btnSet={props.btnSet}
-                                                                  setBtnStyle={props.setBtnStyle}
-                />)}
-            </div>
+            <SettingsDisplay onChangeStartHandlerCallback={p.onChangeStartHandlerCallback}
+                             onChangeMaxHandlerCallback={p.onChangeMaxHandlerCallback}
+                             inputStartStyle={p.inputStartStyle}
+                             inputMaxStyle={p.inputMaxStyle}
+                             startValue={p.startValue}
+                             maxValue={p.maxValue}/>
+            <SettingsButtons onCLickIncHanlder={p.onCLickIncHanlder}
+                             onCLickResHanlder={p.onCLickResHanlder}
+                             onCLickSetHandler={p.onCLickSetHandler}
+                             resetBtnStyle={p.resetBtnStyle}
+                             dataStorage={p.dataStorage}
+                             incBtnStyle={p.incBtnStyle}
+                             setBtnStyle={p.setBtnStyle}
+                             btnReset={p.btnReset}
+                             btnInc={p.btnInc}
+                             btnSet={p.btnSet}/>
         </div>
     );
 };

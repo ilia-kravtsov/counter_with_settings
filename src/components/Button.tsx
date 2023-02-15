@@ -4,33 +4,33 @@ type ButtonType = {
     onCLickIncHanlder: () => void
     onCLickResHanlder: () => void
     onCLickSetHandler: () => void
-    incBtnStyle: string
     resetBtnStyle: string
     buttonNameMap: string
-    btnInc: string
-    btnReset: string
-    btnSet: string
     setBtnStyle: string
+    incBtnStyle: string
+    btnReset: string
+    btnInc: string
+    btnSet: string
 }
 
-const Button = (props: ButtonType) => {
+const Button = (p: ButtonType) => {
 
-    if (props.buttonNameMap === props.btnInc) {
+    if (p.buttonNameMap === p.btnInc) {
         return (
-            <div onClick={props.onCLickIncHanlder} className={props.incBtnStyle}>
-                <div>{props.buttonNameMap}</div>
+            <div onClick={p.onCLickIncHanlder} className={p.incBtnStyle}>
+                <div>{p.buttonNameMap}</div>
             </div>
         )
-    } else if (props.buttonNameMap === props.btnReset) {
+    } else if (p.buttonNameMap === p.btnReset) {
         return (
-            <div onClick={props.onCLickResHanlder} className={props.resetBtnStyle}>
-                <div>{props.buttonNameMap}</div>
+            <div onClick={p.onCLickResHanlder} className={p.resetBtnStyle}>
+                <div>{p.buttonNameMap}</div>
             </div>
         )
-    } else if (props.buttonNameMap === props.btnSet) {
+    } else if (p.buttonNameMap === p.btnSet) {
         return (
-            <div onClick={props.onCLickSetHandler} className={props.setBtnStyle}>
-                <div>{props.buttonNameMap}</div>
+            <div onClick={p.onCLickSetHandler} className={p.setBtnStyle}>
+                <div>{p.buttonNameMap}</div>
              </div>
         )
     } else {

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "../../App.module.css";
 import CounterDisplay from "./CounterDisplay";
-import CounterActionsStore from "./CounterActionsStore";
+import CounterButtons from "./CounterButtons";
 import {dataStorageType} from "../../App";
 
 export type CounterCountainerType = {
@@ -21,20 +21,20 @@ export type CounterCountainerType = {
     startValue: number
 }
 
-const Counter = (props: CounterCountainerType) => {
+const Counter = (p: CounterCountainerType) => {
     return (
         <div className={s.container}>
-            <CounterDisplay countStyle={props.countStyle} stateCounter={props.stateCounter} displayTitle={props.displayTitle} startValue={props.startValue}/>
-            <CounterActionsStore onCLickIncHanlder={props.onCLickIncHanlder}
-                                 onCLickResHanlder={props.onCLickResHanlder}
-                                 incBtnStyle={props.incBtnStyle}
-                                 resetBtnStyle={props.resetBtnStyle}
-                                 dataStorage={props.dataStorage}
-                                 btnInc={props.btnInc}
-                                 btnReset={props.btnReset}
-                                 btnSet={props.btnSet}
-                                 setBtnStyle={props.setBtnStyle}
-                                 onCLickSetHandler={props.onCLickSetHandler}
+            <CounterDisplay countStyle={p.countStyle} stateCounter={p.stateCounter} displayTitle={p.displayTitle} startValue={p.startValue}/>
+            <CounterButtons onCLickIncHanlder={p.onCLickIncHanlder}
+                            onCLickResHanlder={p.onCLickResHanlder}
+                            incBtnStyle={p.incBtnStyle}
+                            resetBtnStyle={p.resetBtnStyle}
+                            dataStorage={p.dataStorage}
+                            btnInc={p.btnInc}
+                            btnReset={p.btnReset}
+                            btnSet={p.btnSet}
+                            setBtnStyle={p.setBtnStyle}
+                            onCLickSetHandler={p.onCLickSetHandler}
             />
         </div>
     );

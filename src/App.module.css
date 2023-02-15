@@ -74,6 +74,16 @@
     align-items: center;
 }
 
+.setBtnWork {
+    background-color: #6fe5f8;
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .setBtnDefault:active {
     background-color: #447882;
 }
@@ -100,25 +110,6 @@
 
 div {
     border-radius: 5px;
-}
-
-.inputStart {
-    width: 60px;
-    outline: none;
-    border-color: #6ce4f9;
-    border-radius: 3px;
-}
-
-.inputStartLessZero {
-    background-color: lightcoral;
-    border-color: red;
-}
-
-.inputMax {
-    width: 60px;
-    outline: none;
-    border-color: #6ce4f9;
-    border-radius: 3px;
 }
 
 
