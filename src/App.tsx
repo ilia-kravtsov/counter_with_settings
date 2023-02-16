@@ -68,7 +68,7 @@ function App() {
         if (event < 0) {
             setDisplayCounter('Incorrect value!')
         }
-        if (event > 0) {
+        if (event >= 0) {
             setDisplayCounter('enter values and press "set"')
         }
         localStorage.setItem('maxValue', JSON.stringify(event))
@@ -80,7 +80,12 @@ function App() {
         if (event < 0) {
             setDisplayCounter('Incorrect value!')
         }
-
+        if (event > 0) {
+            setDisplayCounter('enter values and press "set"')
+        }
+        if (event === 0) {
+            setDisplayCounter('enter values and press "set"')
+        }
         localStorage.setItem('minValue', JSON.stringify(event))
     }
 
@@ -89,7 +94,7 @@ function App() {
         if (maxValue < 0) {
             setDisplayCounter('Incorrect value!')
         }
-        if (maxValue > 0) {
+        if (maxValue >= 0) {
             setDisplayCounter('enter values and press "set"')
         }
         localStorage.setItem('maxValue', JSON.stringify(maxValue+1))
@@ -100,31 +105,31 @@ function App() {
         if (maxValue < 0) {
             setDisplayCounter('Incorrect value!')
         }
-        if (maxValue > 0) {
+        if (maxValue >= 0) {
             setDisplayCounter('enter values and press "set"')
         }
         localStorage.setItem('maxValue', JSON.stringify(maxValue-1))
     }
 
     const minArrowUpClick = () => {
-        setMinValue(minValue+1)
         if (minValue < 0) {
             setDisplayCounter('Incorrect value!')
         }
-        if (minValue > 0) {
+        if (minValue >= 0) {
             setDisplayCounter('enter values and press "set"')
         }
+        setMinValue(minValue+1)
         localStorage.setItem('minValue', JSON.stringify(minValue+1))
     }
 
     const minArrowDownClick = () => {
-        setMinValue(minValue-1)
         if (minValue < 0) {
             setDisplayCounter('Incorrect value!')
         }
-        if (minValue > 0) {
+        if (minValue >= 0) {
             setDisplayCounter('enter values and press "set"')
         }
+        setMinValue(minValue-1)
         localStorage.setItem('minValue', JSON.stringify(minValue-1))
     }
 

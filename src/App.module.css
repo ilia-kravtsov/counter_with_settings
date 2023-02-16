@@ -226,8 +226,12 @@ input {
     font-size: 7px;
 }
 
-.arrows {
+.arrowUp:active {
+    background-color: #272c33;
+}
 
+.arrowDown:active {
+    background-color: #272c33;
 }
 
 .disabled {
