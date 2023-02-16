@@ -12,6 +12,21 @@ function App() {
     let [minValue, setMinValue] = useState<number>(0)
     let [maxValue, setMaxValue] = useState<number>(5)
 
+    let final_image: string | number = stateCounter
+    let incBtnStyle = `${s.incBtn} ${s.pointer}`
+    let resBtnStyle = `${s.resBtn} ${s.pointer}`
+    let setBtnStyle = `${s.setBtn} ${s.pointer}`
+    let final_image_style = s.finalImageDefault
+    let settingsDisplay = s.settingsDisplay
+    let counterDisplay = s.counterDisplay
+    let settingsStyle = s.settings
+    let inputMinStyle = s.startInput
+    let counterStyle = s.container
+    let inputMaxStyle = s.maxInput
+    let disabledSet = false
+    let disabledInc = false
+    let disabledRes = false
+
     useEffect(() => {
 
         let valueAsString = localStorage.getItem('counterValue')
@@ -45,7 +60,7 @@ function App() {
     const onClickRes = () => {setStateCounter(minValue)}
 
     const onClickSet = () => {
-
+        setDisplayCounter('disabledSet')
     }
 
     const onClickSetSettings = () => {
@@ -60,6 +75,7 @@ function App() {
             setStateCounter(newValue)
             setDisplayCounter(newValue)
         }
+        setDisplayCounter('disabledSet')
     }
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -133,21 +149,6 @@ function App() {
         localStorage.setItem('minValue', JSON.stringify(minValue-1))
     }
 
-    let final_image: string | number = stateCounter
-    let incBtnStyle = `${s.incBtn} ${s.pointer}`
-    let resBtnStyle = `${s.resBtn} ${s.pointer}`
-    let setBtnStyle = `${s.setBtn} ${s.pointer}`
-    let final_image_style = s.finalImageDefault
-    let settingsDisplay = s.settingsDisplay
-    let counterDisplay = s.counterDisplay
-    let settingsStyle = s.settings
-    let inputMinStyle = s.startInput
-    let counterStyle = s.container
-    let inputMaxStyle = s.maxInput
-    let disabledSet = false
-    let disabledInc = false
-    let disabledRes = false
-
     if (stateCounter === minValue) {
         resBtnStyle = `${s.resBtn} ${s.disabled}`
         disabledRes = true
@@ -197,6 +198,11 @@ function App() {
         disabledRes = true
         resBtnStyle = `${s.resBtn} ${s.disabled}`
         incBtnStyle = `${s.incBtn} ${s.disabled}`
+    }
+
+    if (displayCounter === 'disabledSet') {
+        disabledSet = true
+        setBtnStyle = `${s.setBtn} ${s.disabled}`
     }
 
     return (
