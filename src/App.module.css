@@ -228,10 +228,12 @@ input {
 
 .arrowUp:active {
     background-color: #272c33;
+    color: #6ce4f9;
 }
 
 .arrowDown:active {
     background-color: #272c33;
+    color: #6ce4f9;
 }
 
 .disabled {
