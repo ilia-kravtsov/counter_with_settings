@@ -1,4 +1,4 @@
-import React, {useState, MouseEvent, useEffect, ChangeEvent} from 'react';
+import React, {useState, useEffect} from 'react';
 import s from './App.module.css';
 import ss from './components/Settings/Settings.module.css'
 import {v1} from "uuid";
@@ -28,7 +28,7 @@ function App() {
     }
 
     let [startValue, setStartValue] = useState<number>(0)
-    let [maxValue, setMaxValue] = useState<number>(0)
+    let [maxValue, setMaxValue] = useState<number>(5)
     let [stateCounter, setStateCounter] = useState<number>(0)
     let [displayTitle, setDisplayTitle] = useState<string | number>('')
 
