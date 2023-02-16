@@ -1,49 +1,47 @@
-import React from 'react';
-import s from "./Settings.module.css";
-import {dataStorageType} from "../../App";
+import React, {ChangeEvent} from 'react';
 import SettingsDisplay from "./SettingsDisplay";
 import SettingsButtons from "./SettingsButtons";
 
 type SettingsType = {
-    onChangeMaxHandlerCallback: (e: number) => void
-    onChangeStartHandlerCallback: (e: number) => void
-    onCLickIncHanlder: () => void
-    onCLickResHanlder: () => void
-    onCLickSetHandler: () => void
-    dataStorage: dataStorageType
-    inputStartStyle: string
-    resetBtnStyle: string
+    onChangeStartValue: (e: ChangeEvent<HTMLInputElement>) => void
+    onChangeMaxValue: (e: ChangeEvent<HTMLInputElement>) => void
+    onClickSetSettings: () => void
+    maxArrowDownClick: () => void
+    minArrowDownClick: () => void
+    maxArrowUpClick: () => void
+    minArrowUpClick: () => void
+    settingsDisplay: string
+    btnNames: Array<string>
     inputMaxStyle: string
-    incBtnStyle: string
+    inputMinStyle: string
+    settingsStyle: string
+    disabledSet: boolean
     setBtnStyle: string
-    countStyle: string
-    startValue: number
-    btnReset: string
     maxValue: number
-    btnInc: string
-    btnSet: string
+    minValue: number
 }
 
 const Settings = (p: SettingsType) => {
-
     return (
-        <div className={s.settingsContainer}>
-            <SettingsDisplay onChangeStartHandlerCallback={p.onChangeStartHandlerCallback}
-                             onChangeMaxHandlerCallback={p.onChangeMaxHandlerCallback}
-                             inputStartStyle={p.inputStartStyle}
+        <div className={p.settingsStyle}>
+            <SettingsDisplay onChangeStartValue={p.onChangeStartValue}
+                             minArrowDownClick={p.minArrowDownClick}
+                             maxArrowDownClick={p.maxArrowDownClick}
+                             onChangeMaxValue={p.onChangeMaxValue}
+                             settingsDisplay={p.settingsDisplay}
+                             minArrowUpClick={p.minArrowUpClick}
+                             maxArrowUpClick={p.maxArrowUpClick}
                              inputMaxStyle={p.inputMaxStyle}
-                             startValue={p.startValue}
-                             maxValue={p.maxValue}/>
-            <SettingsButtons onCLickIncHanlder={p.onCLickIncHanlder}
-                             onCLickResHanlder={p.onCLickResHanlder}
-                             onCLickSetHandler={p.onCLickSetHandler}
-                             resetBtnStyle={p.resetBtnStyle}
-                             dataStorage={p.dataStorage}
-                             incBtnStyle={p.incBtnStyle}
+                             inputMinStyle={p.inputMinStyle}
+                             settingsStyle={p.settingsStyle}
+                             maxValue={p.maxValue}
+                             minValue={p.minValue}
+            />
+            <SettingsButtons onClickSetSettings={p.onClickSetSettings}
+                             disabledSet={p.disabledSet}
                              setBtnStyle={p.setBtnStyle}
-                             btnReset={p.btnReset}
-                             btnInc={p.btnInc}
-                             btnSet={p.btnSet}/>
+                             btnNames={p.btnNames}
+            />
         </div>
     );
 };

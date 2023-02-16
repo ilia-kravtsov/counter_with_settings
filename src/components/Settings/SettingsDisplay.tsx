@@ -1,30 +1,44 @@
 import React, {ChangeEvent} from 'react';
-import s from "./Settings.module.css";
+import s from "../../App.module.css";
 
 type SettingsDisplayType = {
-    maxValue: number
-    startValue: number
-    onChangeMaxHandlerCallback: (e: number) => void
-    onChangeStartHandlerCallback: (e: number) => void
-    inputStartStyle: string
+    onChangeStartValue: (e: ChangeEvent<HTMLInputElement>) => void
+    onChangeMaxValue: (e: ChangeEvent<HTMLInputElement>) => void
+    maxArrowDownClick: () => void
+    minArrowDownClick: () => void
+    maxArrowUpClick: () => void
+    minArrowUpClick: () => void
+    settingsDisplay: string
     inputMaxStyle: string
+    inputMinStyle: string
+    settingsStyle: string
+    maxValue: number
+    minValue: number
 }
 
 const SettingsDisplay = (p: SettingsDisplayType) => {
-
-    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => p.onChangeMaxHandlerCallback(+e.currentTarget.value)
-    const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement>) => p.onChangeStartHandlerCallback(+e.currentTarget.value)
-
     return (
-        <div className={s.settingsDisplayElements}>
-                <div className={s.MaxElement}>
-                    <span className={s.valueMax}>max value: </span>
-                    <input value={p.maxValue} onChange={onChangeMaxHandler} type="number" className={p.inputMaxStyle}/>
+        <div className={p.settingsDisplay}>
+            <div className={s.maxBlock}>
+                <div>
+                    <span className={s.maxSpan}>max value : </span>
+                    <input value={p.maxValue} onChange={p.onChangeMaxValue} type="number" className={p.inputMaxStyle}/>
                 </div>
-                <div className={s.StartElement}>
-                    <span className={s.valuesStart}>start value: </span>
-                    <input value={p.startValue} onChange={onChangeStartHandler} type="number" className={p.inputStartStyle}/>
+                <div className={s.arrows}>
+                    <button onClick={p.maxArrowUpClick} className={s.arrowUp}>↑</button>
+                    <button onClick={p.maxArrowDownClick} className={s.arrowDown}>↓</button>
                 </div>
+            </div>
+            <div className={s.minBlock}>
+                <div>
+                    <span className={s.startSpan}>start value :</span>
+                    <input value={p.minValue} onChange={p.onChangeStartValue} type="number" className={p.inputMinStyle}/>
+                </div>
+                <div className={s.arrows}>
+                    <button onClick={p.minArrowUpClick} className={s.arrowUp}>↑</button>
+                    <button onClick={p.minArrowDownClick} className={s.arrowDown}>↓</button>
+                </div>
+            </div>
         </div>
     );
 };

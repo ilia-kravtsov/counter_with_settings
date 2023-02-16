@@ -26,10 +26,10 @@
     border: 3px solid #6ce4f9;
     width: 175px;
     height: 80px;
-    margin: 0px 10px 10px 10px;
+    margin: 0 10px 10px 10px;
 }
 
-.inputMaxSettingsDispay {
+.inputMaxSettingsDisplay {
     width: 60px;
     outline: none;
     border-color: #6ce4f9;
@@ -37,7 +37,7 @@
     height: 15px;
 }
 
-.inputStartSettingsDispay {
+.inputStartSettingsDisplay {
     width: 60px;
     outline: none;
     border-color: #6ce4f9;

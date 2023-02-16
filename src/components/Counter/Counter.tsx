@@ -1,40 +1,40 @@
 import React from 'react';
-import s from "../../App.module.css";
 import CounterDisplay from "./CounterDisplay";
 import CounterButtons from "./CounterButtons";
-import {dataStorageType} from "../../App";
 
-export type CounterCountainerType = {
-    countStyle: string
-    stateCounter: number
-    onCLickIncHanlder: () => void
-    onCLickResHanlder: () => void
-    onCLickSetHandler: () => void
+type CounterType = {
+    final_image: string | number
+    final_image_style: string
+    btnNames: Array<string>
+    onClickInc: () => void
+    onClickRes: () => void
+    onClickSet: () => void
+    counterDisplay: string
+    disabledInc: boolean
+    disabledRes: boolean
+    disabledSet: boolean
+    counterStyle: string
     incBtnStyle: string
-    resetBtnStyle: string
-    dataStorage: dataStorageType
-    btnInc: string
-    btnReset: string
-    btnSet: string
+    resBtnStyle: string
     setBtnStyle: string
-    displayTitle: string | number
-    startValue: number
 }
 
-const Counter = (p: CounterCountainerType) => {
+const Counter = (p: CounterType) => {
     return (
-        <div className={s.container}>
-            <CounterDisplay countStyle={p.countStyle} stateCounter={p.stateCounter} displayTitle={p.displayTitle} startValue={p.startValue}/>
-            <CounterButtons onCLickIncHanlder={p.onCLickIncHanlder}
-                            onCLickResHanlder={p.onCLickResHanlder}
+        <div className={p.counterStyle}>
+            <CounterDisplay final_image_style={p.final_image_style}
+                            counterDisplay={p.counterDisplay}
+                            final_image={p.final_image}/>
+            <CounterButtons disabledInc={p.disabledInc}
+                            disabledRes={p.disabledRes}
+                            disabledSet={p.disabledSet}
                             incBtnStyle={p.incBtnStyle}
-                            resetBtnStyle={p.resetBtnStyle}
-                            dataStorage={p.dataStorage}
-                            btnInc={p.btnInc}
-                            btnReset={p.btnReset}
-                            btnSet={p.btnSet}
+                            resBtnStyle={p.resBtnStyle}
                             setBtnStyle={p.setBtnStyle}
-                            onCLickSetHandler={p.onCLickSetHandler}
+                            onClickInc={p.onClickInc}
+                            onClickRes={p.onClickRes}
+                            onClickSet={p.onClickSet}
+                            btnNames={p.btnNames}
             />
         </div>
     );

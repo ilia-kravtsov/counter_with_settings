@@ -1,40 +1,25 @@
 import React from 'react';
 import s from "../../App.module.css";
 import Button from "../Button";
-import {dataStorageType} from "../../App";
 
-type CounterActionsStoreType = {
-    onCLickIncHanlder: () => void
-    onCLickResHanlder: () => void
-    onCLickSetHandler: () => void
-    dataStorage: dataStorageType
-    resetBtnStyle: string
-    setBtnStyle: string
+type CounterButtonsType = {
+    btnNames: Array<string>
+    onClickInc: () => void
+    onClickRes: () => void
+    onClickSet: () => void
+    disabledInc: boolean
+    disabledRes: boolean
+    disabledSet: boolean
     incBtnStyle: string
-    btnReset: string
-    btnInc: string
-    btnSet: string
+    resBtnStyle: string
+    setBtnStyle: string
 }
 
-const CounterButtons = (p: CounterActionsStoreType) => {
-
-    let buttonGenerator;
-
-    buttonGenerator = p.dataStorage.counter.map( button => <Button key={button.id}
-                                                                       buttonNameMap={button.buttonName}
-                                                                       onCLickIncHanlder={p.onCLickIncHanlder}
-                                                                       incBtnStyle={p.incBtnStyle}
-                                                                       onCLickResHanlder={p.onCLickResHanlder}
-                                                                       resetBtnStyle={p.resetBtnStyle}
-                                                                       btnInc={p.btnInc}
-                                                                       btnReset={p.btnReset}
-                                                                       btnSet={p.btnSet}
-                                                                       setBtnStyle={p.setBtnStyle}
-                                                                       onCLickSetHandler={p.onCLickSetHandler}
-    />)
+const CounterButtons = (p:CounterButtonsType) => {
     return (
-        <div className={s.parentIncRes}>
-            {buttonGenerator}
+        <div className={s.counterButtons}>
+            <Button btnNames={p.btnNames[0]} disabled={p.disabledInc} btnStyle={p.incBtnStyle} onGeneralClick={p.onClickInc}/>
+            <Button btnNames={p.btnNames[1]} disabled={p.disabledRes} btnStyle={p.resBtnStyle} onGeneralClick={p.onClickRes}/>
         </div>
     );
 };
